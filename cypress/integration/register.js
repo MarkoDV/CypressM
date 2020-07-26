@@ -1,3 +1,5 @@
+/// <reference types="Cypress" />
+
 const faker = require('faker');
 let osnovnoIme = faker.name.findName();
 let prezIme = faker.name.lastName();
