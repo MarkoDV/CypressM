@@ -34,17 +34,16 @@ describe('Registration page', ()=> {
       cy.get('button[type=submit]').click();
       cy.get('.alert').should('have.text', 'The password confirmation does not match.')
     });
-    it('GA-40 : Register page test - First name input field: required', ()=>{
+    it.only('GA-40 : Register page test - First name input field: required', ()=>{
       cy.get('#last-name').type(prezIme);
       cy.get('#email').type(randomEmail);
       cy.get('#password').type(randomPassword);
       cy.get('#password-confirmation').type(randomPassword);
       cy.get('input[type=checkbox]').check();
       cy.get('button[type=submit]').click();
-      const getAlert = () =>{
-        return 'Please fill in this field'
-      };
-      cy.wrap({alert:getAlert}).invoke('alert').should('eq', 'Please fill in this field');
+      cy.get('#first-name').then(($input)=>{
+         expect($input[0].validationMessage).to.eq('Please fill in this field.');
+      });
     });
     it('GA-46 : Register page test - Last name input field: required', ()=>{
       cy.get('#first-name').type(osnovnoIme);
@@ -72,7 +71,7 @@ describe('Registration page', ()=> {
       cy.get('button[type=submit]').click();
       cy.get('.alert').should('have.text', 'The password must be at least 8 characters.')
     });
-    it.only('GA-84 : User cant register twice', ()=>{
+    it('GA-84 : User cant register twice', ()=>{
       cy.get('#first-name').type('test');
       cy.get('#last-name').type('test');
       cy.get('#email').type('ruzictam@gmail.com');
