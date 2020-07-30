@@ -11,7 +11,7 @@ describe('Registration page', ()=> {
   beforeEach('Should be first page before registration', ()=>{
     cy.visit('/register');
   })
-    it('GA-14 : Register page positive test - valid data', ()=> {
+    it.only('GA-14 : Register page positive test - valid data', ()=> {
       cy.get('#first-name').type(osnovnoIme);
       cy.get('#last-name').type(prezIme);
       cy.get('#email').type(randomEmail);

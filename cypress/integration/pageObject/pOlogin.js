@@ -1,12 +1,17 @@
 export default class AuthPage {
-    email(){
+   get email(){
        return cy.get('#email');
     };
-    password(){
+   get password(){
        return cy.get('#password');
     };
-    signInButton(){
+   get signInButton(){
        return cy.get('[type=submit]');
+    };
+   login(imejl, lozinka){
+       this.email.type(imejl);
+       this.password.type(lozinka);
+       this.signInButton.click();
     };
 };
 

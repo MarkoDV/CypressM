@@ -1,21 +1,19 @@
 /// <reference types="Cypress" />
 import {user} from '../fixtures/constants';
-import Login, { authPage } from '../integration/pageObject/pOlogin';
+import  { authPage } from '../integration/pageObject/pOlogin';
 const faker = require('faker');
 let randomEmail = faker.internet.email();
 let randomPassword = faker.internet.password();
 
 describe('The Home Page', ()=> {
   beforeEach('Should visit Login page', ()=>{
-    cy.visit('/');
+    cy.visit('/login');
     cy.server();
     cy.route(Cypress.env('apiUrl') + '/galleries?page=1&term=').as('galleries');
   });
-    it('GA-28 Login-valid data', ()=> {
+    it.only('GA-28 Login-valid data', ()=> {
       cy.get('.nav-link').contains('Login').click();
-      authPage.email().type(user.email);
-      authPage.password().type(user.password);
-      authPage.signInButton().click()
+      authPage.login(user.email, user.password);
       cy.wait('@galleries')
       cy.get('.nav-link').contains('Logout').should('be.visible');
     });
@@ -34,19 +32,14 @@ describe('The Home Page', ()=> {
   });
 describe('Logged', ()=>{
   beforeEach('Should visit Login page', ()=>{
-    cy.visit('/');
+    cy.visit('/login');
     cy.server();
     cy.route(Cypress.env('apiUrl') + '/galleries?page=1&term=').as('galleries');
   });
   it('GA-32 : User is logged', ()=> {
-    cy.get('.nav-link').contains('Login').click()
-    authPage.email().type('jelllenakrstic@gmail.com');
-    authPage.password().type('jelenak1908');
-    authPage.signInButton().click();
+    cy.get('.nav-link').contains('Login').click();
+    authPage.login(user.email, user.password);
     cy.wait('@galleries');
-    cy.get('.nav-link').contains('Logout').should('be.visible');
-    cy.get('.nav-link').contains('My Galleries');
-    cy.get('.nav-link').contains('Create Gallery');
     cy.get('.form-control').should('have.attr', 'placeholder', 'Search...');
     cy.get('[type=button]').should('be.visible');
   });
