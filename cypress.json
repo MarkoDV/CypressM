@@ -1,6 +1,8 @@
 
 {
     "baseUrl": "https://gallery-app.vivifyideas.com/",
+    "chromeWebSecurity": false,
+    "numTestsKeptInMemory": 0,
     "env": {
         "apiUrl" : "https://gallery-api.vivifyideas.com/api"
     }
