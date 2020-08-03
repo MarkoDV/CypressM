@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+
 import {user} from '../fixtures/constants';
 import  { authPage } from '../integration/pageObject/pOlogin';
 import {createGall} from '../integration/pageObject/pOcreateGall'
@@ -23,10 +23,10 @@ describe('Create gallery', ()=>{
         createGall.creation(randomTitle, randomDescription, 'https://media-cdn.tripadvisor.com/media/photo-p/10/03/28/52/pogled-iz-baste-na-zalazak.jpg');
         cy.url().should("eq", "https://gallery-app.vivifyideas.com/");
     });
-    it('GA-33 : Home Page - paginacija Logged in user 20 galleries',()=>{
+    it.only('GA-33 : Home Page - paginacija Logged in user 20 galleries',()=>{
         cy.get('.nav-link').contains('My Galleries').should('be.visible').click();
         cy.url().should('eq', 'https://gallery-app.vivifyideas.com/my-galleries');
-        for(let i =0; i<9; i++){
+        for(let i =0; i<10; i++){
             createGall.creation(randomTitle, randomDescription, 'https://media-cdn.tripadvisor.com/media/photo-p/10/03/28/52/pogled-iz-baste-na-zalazak.jpg');
             cy.url().should('eq','https://gallery-app.vivifyideas.com/');
         };

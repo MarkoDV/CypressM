@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+
 import {user} from '../fixtures/constants';
 import  { authPage } from '../integration/pageObject/pOlogin';
 const faker = require('faker');
