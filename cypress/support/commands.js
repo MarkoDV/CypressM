@@ -13,10 +13,10 @@
              email: imejl,
              password: lozinka
          }
-     }).then((resp)=>{
-        cy.log(resp.body);
-        expect(resp.body).to.have.property('access_token')
-        localStorage.setItem('token', resp.body.access_token)
+     }).then((response)=>{
+        cy.log(response.body);
+        expect(response.body).to.have.property('access_token')
+        localStorage.setItem('token', response.body.access_token)
         cy.visit('/')
   })
  })
